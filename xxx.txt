@@ -19,3 +19,36 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+
+
+
+
+# 1. Start cluster
+minikube start --driver=docker
+
+# 2. Check node
+kubectl get nodes
+
+# 3. Deploy nginx (3 replicas)
+kubectl create deployment nginx --image=nginx --replicas=3
+
+# 4. Check pods
+kubectl get pods
+
+# 5. Expose the deployment
+kubectl expose deployment nginx --type=NodePort --port=80
+
+# 6. Open website
+minikube service nginx
+
+# 7. Scale to 5
+kubectl scale deployment nginx --replicas=5
+
+# 8. Delete service
+kubectl delete service nginx
+
+# 9. Delete deployment
+kubectl delete deployment nginx
+
+# 10. Stop cluster
+minikube stop
