@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lms-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lms
+  template:
+    metadata:
+      labels:
+        app: lms
+
+    spec:
+      containers:
+        - name: lms-container
+          image: lmsimg:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
